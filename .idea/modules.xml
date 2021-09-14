@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../calendar-typescript/.idea/calendar-typescript.iml" filepath="$PROJECT_DIR$/../calendar-typescript/.idea/calendar-typescript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/calendar-typescript.iml" filepath="$PROJECT_DIR$/.idea/calendar-typescript.iml" />
     </modules>
   </component>
 </project>
