@@ -4,7 +4,7 @@ import {AppDispatch} from "../../index";
 import axios from "axios";
 
 export const AuthActionCreator = {
-    setUSer: (user: IUser): SetUserAction => ({type: AuthActionEnum.SET_USER, payload: user}),
+    setUser: (user: IUser): SetUserAction => ({type: AuthActionEnum.SET_USER, payload: user}),
     setIsAuth: (auth: boolean) : SetAuthAction => ({type: AuthActionEnum.SET_AUTH, payload:auth}),
     setIsLoading: (payload: boolean) : SetIsLoadingAction => ({type: AuthActionEnum.SET_IS_LOADING, payload}),
     setIsError: (payload: string): SetErrorAction => ({type: AuthActionEnum.SET_ERROR, payload}),
@@ -23,7 +23,7 @@ export const AuthActionCreator = {
                     localStorage.setItem("auth", "true");
                     localStorage.setItem("username", mockUser.username);
                     dispatch(AuthActionCreator.setIsAuth(true));
-                    dispatch(AuthActionCreator.setUSer(mockUser));
+                    dispatch(AuthActionCreator.setUser(mockUser));
                 } else {
                     dispatch(AuthActionCreator.setIsError("Пользователь ввел некоректный пароль или логин"))
                 }
@@ -38,7 +38,7 @@ export const AuthActionCreator = {
     logout: () => async (dispatch: AppDispatch) => {
             localStorage.removeItem("auth")
             localStorage.removeItem("username")
-            dispatch(AuthActionCreator.setUSer({} as IUser))
+            dispatch(AuthActionCreator.setUser({} as IUser))
             dispatch(AuthActionCreator.setIsAuth(false))
     }
 }

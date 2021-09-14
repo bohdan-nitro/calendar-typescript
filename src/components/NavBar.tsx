@@ -3,13 +3,12 @@ import {Layout, Menu, Row} from "antd";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "../routes";
 import {useTypeSelector} from "../hooks/useTypeSelector";
-import {useDispatch} from "react-redux";
-import {AuthActionCreator} from "../store/reducers/auth/action-creator";
+import {useActions} from "../hooks/useAcrions";
 
 const NavBar: FC = () => {
-    const dispatch = useDispatch();
     const router = useHistory();
-    const {isAuth} = useTypeSelector(state => state.auth)
+    const {logout} = useActions();
+    const {isAuth, user} = useTypeSelector(state => state.auth)
     return (
         <Layout.Header>
             <Row justify={"end"}>
@@ -17,11 +16,11 @@ const NavBar: FC = () => {
                     ?
                     <>
                         <div style={{color: "#fff"}}>
-                            Nitro
+                            {user.username}
                         </div>
                         <Menu theme={"dark"} mode={"horizontal"} selectable={false}>
                             <Menu.Item
-                                onClick={() => dispatch(AuthActionCreator.logout())}
+                                onClick={logout}
                                 key={1}
                             >
                                 Выйти
