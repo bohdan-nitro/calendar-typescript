@@ -2,6 +2,7 @@ import {IUser} from "../../../models/IUser";
 import {AuthActionEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction} from "./types";
 import {AppDispatch} from "../../index";
 import axios from "axios";
+import UserService from "../../../api/UserService";
 
 export const AuthActionCreator = {
     setUser: (user: IUser): SetUserAction => ({type: AuthActionEnum.SET_USER, payload: user}),
@@ -13,7 +14,7 @@ export const AuthActionCreator = {
             dispatch(AuthActionCreator.setIsLoading(true));
             setTimeout(async () => {
                 //берем данные из нашего бекенда в данном случае и файла локально
-                const response = await axios.get<IUser[]>("./user.json")
+                const response = await UserService.getUsers();
 
                 console.log(response.data)
                 //Сравниваем поля которые мы получили с теми которые былли введены в поля инпутов
@@ -22,8 +23,8 @@ export const AuthActionCreator = {
                 if (mockUser){
                     localStorage.setItem("auth", "true");
                     localStorage.setItem("username", mockUser.username);
-                    dispatch(AuthActionCreator.setIsAuth(true));
                     dispatch(AuthActionCreator.setUser(mockUser));
+                    dispatch(AuthActionCreator.setIsAuth(true));
                 } else {
                     dispatch(AuthActionCreator.setIsError("Пользователь ввел некоректный пароль или логин"))
                 }
